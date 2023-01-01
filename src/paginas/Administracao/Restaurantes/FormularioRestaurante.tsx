@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import IRestaurante from "../../interfaces/IRestaurante";
 import {
   Box,
   Button,
@@ -9,7 +8,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import http from "../../http";
+import http from "../../../http";
+import IRestaurante from "../../../interfaces/IRestaurante";
 
 export default function FormularioRestaurante() {
   const [nomeRestaurante, setNomeRestaurante] = useState("");

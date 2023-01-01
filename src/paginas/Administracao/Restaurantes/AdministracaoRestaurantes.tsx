@@ -10,15 +10,19 @@ import {
 } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import http from "../../http";
-import IRestaurante from "../../interfaces/IRestaurante";
+import http from "../../../http";
+import IRestaurante from "../../../interfaces/IRestaurante";
 
 export default function AdministracaoRestaurantes() {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);
 
-  const excluir = (restaurante: IRestaurante) => {
-    http.delete(`restaurantes/${restaurante.id}/`).then(() => {
-      console.log("Restaurante excluído");
+  const excluir = (restauranteAhSerExcluido: IRestaurante) => {
+    http.delete(`restaurantes/${restauranteAhSerExcluido.id}/`).then(() => {
+      const listaRestaurantes = restaurantes.filter(
+        (restaurante) => restaurante.id !== restauranteAhSerExcluido.id
+      );
+
+      setRestaurantes([...listaRestaurantes]);
     });
   };
 
