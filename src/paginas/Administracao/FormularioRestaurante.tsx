@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import IRestaurante from "../../interfaces/IRestaurante";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import http from "../../http";
 
 export default function FormularioRestaurante() {
@@ -42,13 +49,18 @@ export default function FormularioRestaurante() {
 
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        flexGrow: 1,
+      }}
     >
       <Typography component="h1" variant="h6">
         Formulário de Restaurantes
       </Typography>
 
-      <Box component="form" onSubmit={formSubmitted}>
+      <Box component="form" sx={{ width: "100%" }} onSubmit={formSubmitted}>
         <TextField
           value={nomeRestaurante}
           onChange={(e) => setNomeRestaurante(e.target.value)}

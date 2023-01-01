@@ -16,17 +16,17 @@ import IRestaurante from "../../interfaces/IRestaurante";
 export default function AdministracaoRestaurantes() {
   const [restaurantes, setRestaurantes] = useState<IRestaurante[]>([]);
 
-  useEffect(() => {
-    http.get<IRestaurante[]>("restaurantes/").then((res) => {
-      setRestaurantes(res.data);
-    });
-  }, [restaurantes]);
-
   const excluir = (restaurante: IRestaurante) => {
     http.delete(`restaurantes/${restaurante.id}/`).then(() => {
       console.log("Restaurante excluído");
     });
   };
+
+  useEffect(() => {
+    http.get<IRestaurante[]>("restaurantes/").then((res) => {
+      setRestaurantes(res.data);
+    });
+  }, []);
 
   return (
     <TableContainer component={Paper}>
