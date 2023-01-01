@@ -1,8 +1,8 @@
-import { Box, Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import IRestaurante from "../../interfaces/IRestaurante";
+import { Box, Button, TextField, Typography } from "@mui/material";
+import http from "../../http";
 
 export default function FormularioRestaurante() {
   const [nomeRestaurante, setNomeRestaurante] = useState("");
@@ -10,13 +10,9 @@ export default function FormularioRestaurante() {
 
   useEffect(() => {
     if (params.id) {
-      axios
-        .get<IRestaurante>(
-          `http://0.0.0.0:8000/api/v2/restaurantes/${params.id}/`
-        )
-        .then((res) => {
-          setNomeRestaurante(res.data.nome);
-        });
+      http.get<IRestaurante>(`restaurantes/${params.id}/`).then((res) => {
+        setNomeRestaurante(res.data.nome);
+      });
     }
   }, [params]);
 
@@ -24,16 +20,16 @@ export default function FormularioRestaurante() {
     e.preventDefault();
 
     if (params.id) {
-      axios
-        .put(`http://0.0.0.0:8000/api/v2/restaurantes/${params.id}/`, {
+      http
+        .put(`restaurantes/${params.id}/`, {
           nome: nomeRestaurante,
         })
         .then(() => {
           alert("Restaurante atualizado com sucesso!");
         });
     } else {
-      axios
-        .post("http://0.0.0.0:8000/api/v2/restaurantes/", {
+      http
+        .post("restaurantes/", {
           nome: nomeRestaurante,
         })
         .then(() => {
